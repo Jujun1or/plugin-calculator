@@ -3,14 +3,19 @@
 
 enum class TokenType {
     Number,
+    Identifier,
     Operator,
-    Unknown,
-    End
+    LParen,
+    RParen,
+    Comma,
+    End,
+    Unknown
 };
 
 struct Token {
     TokenType type;
     std::string text;
+    double value = 0.0;
     size_t pos = 0;
 
     Token() = default;

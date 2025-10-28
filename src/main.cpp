@@ -1,14 +1,17 @@
 #include <iostream>
-#include "Tokenizer.hpp"
+#include "Parser.hpp"
 
 int main() {
-    std::string expr;
     std::cout << "Enter expression: ";
+    std::string expr;
     std::getline(std::cin, expr);
 
-    Tokenizer tokenizer(expr);
-    Token t = tokenizer.next();
-    std::cout << "First token type: " << static_cast<int>(t.type) << "\n";
+    Parser parser(expr);
+    if (parser.parse()) {
+        parser.debugPrint();
+    } else {
+        std::cerr << "Parse error.\n";
+    }
 
     return 0;
 }

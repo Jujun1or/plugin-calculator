@@ -8,6 +8,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(calc
     src/main.cpp
+    src/Tokenizer.cpp
+    src/Parser.cpp
 )
 
 if (WIN32)
