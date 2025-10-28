@@ -1,12 +1,14 @@
 #include <iostream>
+#include "Tokenizer.hpp"
 
-int main(int argc, char** argv) {
-    std::cout << "Calculator project skeleton initialized." << std::endl;
-    std::cout << "Args count: " << argc - 1 << std::endl;
+int main() {
+    std::string expr;
+    std::cout << "Enter expression: ";
+    std::getline(std::cin, expr);
 
-    for (int i = 1; i < argc; ++i) {
-        std::cout << "Arg " << i << ": " << argv[i] << std::endl;
-    }
+    Tokenizer tokenizer(expr);
+    Token t = tokenizer.next();
+    std::cout << "First token type: " << static_cast<int>(t.type) << "\n";
 
     return 0;
 }
