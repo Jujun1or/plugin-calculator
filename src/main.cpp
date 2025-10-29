@@ -1,8 +1,13 @@
 #include <iostream>
 #include "Parser.hpp"
 #include "Evaluator.hpp"
+#include "PluginManager.hpp"
 
 int main() {
+    PluginManager plugins;
+    plugins.loadPlugins("./plugins");
+    plugins.printLoaded();
+
     std::cout << "Enter expression: ";
     std::string expr;
     std::getline(std::cin, expr);
