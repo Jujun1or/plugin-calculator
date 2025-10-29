@@ -8,7 +8,7 @@ int main() {
 
     Parser parser(expr);
     if (parser.parse()) {
-        parser.debugPrint();
+        parser.printRpn();
     } else {
         std::cerr << "Parse error.\n";
     }

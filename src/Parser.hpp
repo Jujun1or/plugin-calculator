@@ -1,16 +1,19 @@
 #pragma once
 #include <string>
-#include <vector>
-#include "Token.hpp"
 #include "Tokenizer.hpp"
+#include "OperatorTable.hpp"
+#include "Rpn.hpp"
 
 class Parser {
 public:
     explicit Parser(const std::string& expr);
     bool parse();
-    void debugPrint() const;
+    void printRpn() const;
 
 private:
     Tokenizer tokenizer;
-    std::vector<Token> tokens;
+    OperatorTable ops;
+    RpnProgram rpn;
+
+    bool toRpn(); // Shunting-yard
 };

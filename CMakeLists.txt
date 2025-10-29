@@ -10,6 +10,8 @@ add_executable(calc
     src/main.cpp
     src/Tokenizer.cpp
     src/Parser.cpp
+    src/OperatorTable.cpp
+    src/Rpn.cpp
 )
 
 if (WIN32)
