@@ -12,6 +12,7 @@ add_executable(calc
     src/Parser.cpp
     src/OperatorTable.cpp
     src/Rpn.cpp
+    src/Evaluator.cpp
 )
 
 if (WIN32)

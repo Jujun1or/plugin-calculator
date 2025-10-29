@@ -10,6 +10,8 @@ public:
     bool parse();
     void printRpn() const;
 
+    const RpnProgram& getRpn() const { return rpn; }
+
 private:
     Tokenizer tokenizer;
     OperatorTable ops;

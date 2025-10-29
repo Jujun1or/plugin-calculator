@@ -19,6 +19,8 @@ public:
     void add(const RpnItem& item);
     void print() const;
 
+    const std::vector<RpnItem>& getItems() const { return _code; }
+
 private:
     std::vector<RpnItem> _code;
 };

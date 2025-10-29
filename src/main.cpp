@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Parser.hpp"
+#include "Evaluator.hpp"
 
 int main() {
     std::cout << "Enter expression: ";
@@ -7,11 +8,23 @@ int main() {
     std::getline(std::cin, expr);
 
     Parser parser(expr);
-    if (parser.parse()) {
-        parser.printRpn();
-    } else {
+    if (!parser.parse()) {
         std::cerr << "Parse error.\n";
+        return 1;
     }
 
+    parser.printRpn();
+
+    bool ok = false;
+    std::string err;
+    Evaluator eval;
+    double result = eval.evaluate(parser.getRpn(), ok, err);
+
+    if (!ok) {
+        std::cerr << "Error: " << err << "\n";
+        return 1;
+    }
+
+    std::cout << "Result: " << result << "\n";
     return 0;
 }
