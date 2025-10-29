@@ -13,7 +13,10 @@ add_executable(calc
     src/OperatorTable.cpp
     src/Rpn.cpp
     src/Evaluator.cpp
+    src/WinDynamicLibrary.cpp
+    src/PluginManager.cpp
 )
+
 
 if (WIN32)
     set_target_properties(calc PROPERTIES
