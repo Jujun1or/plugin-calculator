@@ -1,7 +1,7 @@
 #include <iostream>
-#include "Parser.hpp"
-#include "Evaluator.hpp"
-#include "PluginManager.hpp"
+#include "../parser/Parser.hpp"
+#include "../eval/Evaluator.hpp"
+#include "../plugin_manager/PluginManager.hpp"
 
 int main() {
     PluginManager plugins;

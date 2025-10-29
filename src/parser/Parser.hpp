@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-#include "Tokenizer.hpp"
+#include "../tokens/Tokenizer.hpp"
 #include "OperatorTable.hpp"
-#include "Rpn.hpp"
+#include "../rpn/Rpn.hpp"
 
 class Parser {
 public:

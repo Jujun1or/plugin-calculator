@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 #include "PluginAPI.hpp"
-#include "IDynamicLibrary.hpp"
+#include "../platform/IDynamicLibrary.hpp"
 
 
 struct PluginFunction {

@@ -1,5 +1,5 @@
 #include "PluginManager.hpp"
-#include "WinDynamicLibrary.hpp"
+#include "../platform/WinDynamicLibrary.hpp"
 #include <filesystem>
 #include <iostream>
 

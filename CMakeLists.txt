@@ -7,15 +7,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(calc
-    src/main.cpp
-    src/Tokenizer.cpp
-    src/Parser.cpp
-    src/OperatorTable.cpp
-    src/Rpn.cpp
-    src/Evaluator.cpp
-    src/WinDynamicLibrary.cpp
-    src/PluginManager.cpp
+    src/app/main.cpp
+    src/tokens/Tokenizer.cpp
+    src/parser/OperatorTable.cpp
+    src/parser/Parser.cpp
+    src/rpn/Rpn.cpp
+    src/eval/Evaluator.cpp
+    src/platform/WinDynamicLibrary.cpp
+    src/plugin_manager/PluginManager.cpp
 )
+
 
 
 if (WIN32)
