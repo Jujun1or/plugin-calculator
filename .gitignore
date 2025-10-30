@@ -7,6 +7,10 @@ CMakeFiles/
 cmake_install.cmake
 
 *.ninja
+*.ninja_log
+*.ninja_deps
 
 *.obj
 *.exe
+*.dll
+*.a
