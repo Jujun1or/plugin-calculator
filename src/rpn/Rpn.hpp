@@ -20,6 +20,8 @@ public:
     void print() const;
 
     const std::vector<RpnItem>& getItems() const { return _code; }
+    bool empty() const { return _code.empty(); }
+    RpnItemType lastType() const;
 
 private:
     std::vector<RpnItem> _code;

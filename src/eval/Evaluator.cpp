@@ -28,19 +28,19 @@ double Evaluator::evaluate(const RpnProgram& program, bool& ok, std::string& err
             }
             double b = st.top(); st.pop();
             double a = st.top(); st.pop();
-
             double result = applyOperator(item.text, a, b, ok, err);
             if (!ok) return 0.0;
             st.push(result);
         }
-        else if (item.type == RpnItemType::UNARY_OP) {
+        else if (item.text == "u-" || item.type == RpnItemType::UNARY_OP) {
             if (st.empty()) {
                 ok = false;
                 err = "Not enough operands for unary operator " + item.text;
                 return 0.0;
             }
             double a = st.top(); st.pop();
-            double result = (item.text == "-") ? -a : a;
+
+            double result = (item.text == "u-") ? -a : a;
             st.push(result);
         }
         else if (item.type == RpnItemType::FUNCTION_CALL) {
@@ -71,7 +71,6 @@ double Evaluator::evaluate(const RpnProgram& program, bool& ok, std::string& err
                 err = errMsg ? errMsg : "Plugin function error";
                 return 0.0;
             }
-
             st.push(res);
         }
     }

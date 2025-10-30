@@ -11,3 +11,8 @@ void RpnProgram::print() const {
         std::cout << i.text << " ";
     std::cout << "\n";
 }
+
+RpnItemType RpnProgram::lastType() const {
+        if (_code.empty()) return RpnItemType::NUMBER;
+        return _code.back().type;
+    }

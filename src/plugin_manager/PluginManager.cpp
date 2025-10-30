@@ -43,9 +43,6 @@ bool PluginManager::loadPlugins(const std::string& dir) {
             functions[f.name] = f;
             libs.push_back(std::move(lib));
             ++count;
-
-            std::cout << "Loaded plugin: " << f.name
-                      << " (arity=" << f.arity << ")\n";
         }
     }
 
