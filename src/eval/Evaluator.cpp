@@ -1,7 +1,9 @@
 #include "Evaluator.hpp"
-#include <stack>
 #include <cmath>
 #include <iostream>
+
+Evaluator::Evaluator(const PluginManager& pm)
+    : plugins(pm) {}
 
 double Evaluator::evaluate(const RpnProgram& program, bool& ok, std::string& err) const {
     ok = true;
@@ -40,6 +42,37 @@ double Evaluator::evaluate(const RpnProgram& program, bool& ok, std::string& err
             double a = st.top(); st.pop();
             double result = (item.text == "-") ? -a : a;
             st.push(result);
+        }
+        else if (item.type == RpnItemType::FUNCTION_CALL) {
+            const PluginFunction* f = plugins.getFunction(item.text);
+            if (!f) {
+                ok = false;
+                err = "Unknown function: " + item.text;
+                return 0.0;
+            }
+
+            if (st.size() < f->arity) {
+                ok = false;
+                err = "Not enough arguments for function " + item.text;
+                return 0.0;
+            }
+
+            std::vector<double> args(f->arity);
+            for (int i = f->arity - 1; i >= 0; --i) {
+                args[i] = st.top();
+                st.pop();
+            }
+
+            bool callOk = true;
+            const char* errMsg = nullptr;
+            double res = f->func(args.data(), f->arity, &callOk, &errMsg);
+            if (!callOk) {
+                ok = false;
+                err = errMsg ? errMsg : "Plugin function error";
+                return 0.0;
+            }
+
+            st.push(res);
         }
     }
 
