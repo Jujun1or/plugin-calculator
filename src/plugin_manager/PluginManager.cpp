@@ -2,9 +2,10 @@
 #include "../platform/WinDynamicLibrary.hpp"
 #include <filesystem>
 #include <iostream>
-
+#include <cstdlib>
 
 namespace fs = std::filesystem;
+
 
 bool PluginManager::loadPlugins(const std::string& dir) {
     if (!fs::exists(dir)) {
@@ -72,5 +73,49 @@ void PluginManager::printLoaded() const {
     std::cout << "Loaded functions:\n";
     for (const auto& [name, f] : functions) {
         std::cout << "  - " << name << " (" << f.arity << " args)\n";
+    }
+}
+
+bool PluginManager::_compileIfNeeded(const std::string& src, const std::string& out) {
+    try {
+        if (fs::exists(out)) {
+            auto tSrc = fs::last_write_time(src);
+            auto tOut = fs::last_write_time(out);
+            if (tOut >= tSrc)
+                return false;
+        }
+
+        std::string name = fs::path(src).stem().string();
+        std::cout << "Compiling plugin: " << name << "..." << std::endl;
+
+        std::string cmd =
+            "g++ -std=c++20 -shared -fPIC -O2 "
+            "-I./src/plugins "
+            "-o \"" + out + "\" \"" + src + "\"";
+
+        int res = std::system(cmd.c_str());
+        if (res == 0) {
+            std::cout << "Built " << out << std::endl;
+            return true;
+        } else {
+            std::cerr << "Failed to build " << name << std::endl;
+            return false;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Exception compiling plugin: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+void PluginManager::buildPluginsFromSource(const std::string& srcDir, const std::string& outDir) {
+    if (!fs::exists(srcDir)) return;
+
+    for (const auto& entry : fs::directory_iterator(srcDir)) {
+        if (entry.path().extension() == ".cpp") {
+            std::string src = entry.path().string();
+            std::string name = entry.path().stem().string();
+            std::string out = outDir + "/" + name + ".dll";
+            _compileIfNeeded(src, out);
+        }
     }
 }

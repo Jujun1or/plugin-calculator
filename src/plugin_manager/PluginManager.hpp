@@ -18,10 +18,13 @@ public:
     bool loadPlugins(const std::string& dir);
     bool hasFunction(const std::string& name) const;
     const PluginFunction* getFunction(const std::string& name) const;
+    void buildPluginsFromSource(const std::string& srcDir, const std::string& outDir);
 
     void printLoaded() const;
 
 private:
     std::vector<std::unique_ptr<IDynamicLibrary>> libs;
     std::unordered_map<std::string, PluginFunction> functions;
+    
+    bool _compileIfNeeded(const std::string& src, const std::string& out);
 };
