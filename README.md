@@ -4,7 +4,7 @@
 ## Сборка и запуск
 **1️⃣ Клонировать проект**
 
-git clone https://github.com/<your-username>/calculator.git
+git clone https://github.com/Jujun1or/plugin-calculator
 
 cd calculator
 
